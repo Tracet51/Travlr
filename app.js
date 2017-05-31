@@ -6,27 +6,21 @@ var request = require("request");
 var googleMaps = require("@google/maps");
 var process = require("process");
 var path = require("path");
-//import * as botbuilder_azure from "botbuilder-azure";
 var googleMapsClient = googleMaps.createClient({
     key: process.env.GOOGLE_MAPS_KEY
 });
-var useEmulator = (process.env.NODE_ENV == 'development');
-useEmulator = true;
-/*
-let connector: any = useEmulator ? new builder.ChatConnector() : new botbuilder_azure.BotServiceConnector({
-    appId: process.env['MicrosoftAppId'],
-    appPassword: process.env['MicrosoftAppPassword'],
-    stateEndpoint: process.env['BotStateEndpoint'],
-    openIdMetadata: process.env['BotOpenIdMetadata']
+
+// Setup Restify Server
+var server = restify.createServer();
+server.listen(process.env.port || process.env.PORT || 3978, function () {
+   console.log('%s listening to %s', server.name, server.url); 
 });
 
-*/
 var connector = new builder.ChatConnector({
     appId: process.env.MICROSOFT_APP_ID,
     appPassword: process.env.MICROSOFT_APP_PASSWORD
 });
 var bot = new builder.UniversalBot(connector);
-bot.localePath(path.join(__dirname, './locale'));
 function HtmlParse(html) {
     html += " ";
     var html_array = html.split("");
@@ -992,13 +986,4 @@ bot.dialog("/options", [
         }
     }
 ]);
-if (useEmulator) {
-    var server_1 = restify.createServer();
-    server_1.listen(process.env.port || process.env.PORT || 3978, function () {
-        console.log('%s listening to %s', server_1.name, server_1.url);
-    });
-    server_1.post('/api/messages', connector.listen());
-}
-else {
-    module.exports = { "default": connector.listen() };
-}
+
