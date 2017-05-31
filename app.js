@@ -355,9 +355,9 @@ bot.dialog('/', [
         //=========================================================
         console.log("In uber");
         // Set all of the constants
-        var client_id = process.env.UBER_APP_ID,
-        var client_secret = process.env.UBER_APP_PASSWORD,
-        var server_token = process.env.UBER_APP_TOKEN,
+        var client_id = process.env.UBER_APP_ID
+        var client_secret = process.env.UBER_APP_PASSWORD
+        var server_token = process.env.UBER_APP_TOKEN
         var perference = session.userData.perference;
         var group = session.userData.group;
         var rides = [];
