@@ -930,6 +930,7 @@ bot.dialog('/', [
                         "text": "- Duration: " + transitInfo.transitDuration
                     }
                 ];
+        }
             // Check to see if there is an error with the ridesharing 
             var rideshareMessage = void 0;
             if (rideshare.serviceType == "Error") {
@@ -1014,7 +1015,6 @@ bot.dialog('/', [
             session.userData.Rideshare = rideshare;
             session.replaceDialog("/options");
         }
-    }
 ]);
 // Dialogue for infomation 
 bot.dialog("/options", [
